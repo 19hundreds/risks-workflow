@@ -1,0 +1,12 @@
+#theme: jekyll-theme-slate
+remote_theme: pawamoy/jekyll-readthedocs
+
+# Site global vars
+title: R.I.S.K.S.
+description: Relatively Insecure System for Keys and Secrets
+author: "1900"
+github_username: 19hundreds
+
+# Navigation
+header_pages:
+  - 01_introduction.md

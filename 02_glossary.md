@@ -3,9 +3,6 @@ title: Glossary
 permalink: /glossary
 ---
 
-
-# Glossary
-
 For me good part of the difficulty of studying security comes from terminology. There is always that moment in which I confuse terms and I end up misunderstanding or being unclear.
 
 Even while writing R.I.S.K.S. I often find myself using terms as synonymous when they are not, like password and passphrase and this is confusing.

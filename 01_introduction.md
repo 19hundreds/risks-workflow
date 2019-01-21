@@ -69,4 +69,4 @@ They are closed source operating systems and this means that they can't be trust
 
 ## Can R.I.S.K.S. be adopted only in Qubes OS?
 
-No, it can be implemented also in Linux but the user has to do the extra mile to fit the R.I.S.K.S. in the chosen Linux box.
+No, it can be implemented also in Linux but the user has to do the extra mile to fit R.I.S.K.S. in the chosen Linux box.

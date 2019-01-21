@@ -1,5 +1,7 @@
 ---
 title: Introduction
+permalink: /introduction
+layout: home
 ---
 
 - [About](#about)

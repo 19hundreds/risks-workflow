@@ -12,9 +12,6 @@ permalink: /introduction
     - [Can R.I.S.K.S. be adopted only in Qubes OS?](#can-risks-be-adopted-only-in-qubes-os)
 
 
-In this step-by-step guide I describe how I manage my credentials and secrets on [Qubes OS](https://www.qubes-os.org/) also known as R.I.S.K.S (**R**elatively **I**nsecure **S**ystem for **K**eys and **S**ecrets) workflow.
-
-
 # About
 
 I hope and think that R.I.S.K.S. can help who has little security background and is concerned about it. That's exactly how I started with R.I.S.K.S.
@@ -49,7 +46,7 @@ Feel free to open an issue on [Github](https://github.com/19hundreds/password-ma
 
 # Why Qubes OS?
 
-Qubes OS is a "reasonably secure operating system for personal computer". It's based on the Xen hypervisor and offers better security by compartmentalizing the user's activities in isolated Linux virtual machines called _qubes_.
+[Qubes OS](https://www.qubes-os.org/) is a "reasonably secure operating system for personal computer". It's based on the Xen hypervisor and offers better security by compartmentalizing the user's activities in isolated Linux virtual machines called _qubes_.
 
 The basic concept is that, by separating the daily activities and performing them in separated environments, the attack surface is smaller and minimizes the damages in case of accident.
 

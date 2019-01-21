@@ -1,13 +1,36 @@
+# Build settings
+
 #theme: jekyll-theme-slate
 remote_theme: pawamoy/jekyll-readthedocs
+markdown: kramdown
 
 # Site global vars
 title: R.I.S.K.S.
-description: Relatively Insecure System for Keys and Secrets
+description: Relatively Insecure System for Keys and Secrets for Qubes OS
 author: "1900"
-github_username: 19hundreds
 
 # Navigation
 header_pages:
   - 01_introduction.md
   - 02_glossary.md
+
+# Social links
+github_username: 19hundreds
+# twitter_username: jekyllrb
+# github_username:  jekyll
+# rss: rss
+# dribbble_username: jekyll
+# facebook_username: jekyll
+# flickr_username: jekyll
+# instagram_username: jekyll
+# linkedin_username: jekyll
+# pinterest_username: jekyll
+# youtube_username: jekyll
+# googleplus_username: +jekyll
+
+# Mastodon instances
+# mastodon:
+# - username: jekyll
+#   instance: example.com
+# - username: jekyll2
+#   instance: example.com

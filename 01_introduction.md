@@ -1,7 +1,6 @@
 ---
 title: Introduction
 permalink: /introduction
-layout: home
 ---
 
 - [About](#about)
@@ -13,9 +12,10 @@ layout: home
     - [Can R.I.S.K.S. be adopted only in Qubes OS?](#can-risks-be-adopted-only-in-qubes-os)
 
 
-# About
-
 In this step-by-step guide I describe how I manage my credentials and secrets on [Qubes OS](https://www.qubes-os.org/) also known as R.I.S.K.S (**R**elatively **I**nsecure **S**ystem for **K**eys and **S**ecrets) workflow.
+
+
+# About
 
 I hope and think that R.I.S.K.S. can help who has little security background and is concerned about it. That's exactly how I started with R.I.S.K.S.
 

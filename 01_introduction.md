@@ -57,6 +57,8 @@ Compartmentalization also goes along very well with the use of multiple identiti
 
 More security and more privacy are default achievements right out the box for a Qubes OS user, even for those with shallow technical background.
 
+Don't trust me on this: see what the [experts](https://www.qubes-os.org/experts/) say about Qubes OS.
+
 Unfortunately the learning curve can be quite steep (especially for those with no experience in linux) but its [documentation](https://www.qubes-os.org/doc/) is awesome.
 
 # Why not Linux?

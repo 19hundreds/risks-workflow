@@ -2,16 +2,22 @@
 title: Get started
 permalink: get-started
 ---
+
+---
+
 - [Before starting](#before-starting)
     - [Isolated place](#isolated-place)
     - [Paper password](#paper-password)
 - [Get started](#get-started)
-- [Vault qube configuration](#vault-qube-configuration)
+- [Vault configuration](#vault-configuration)
     - [Generic software](#generic-software)
     - [Software for secrecy](#software-for-secrecy)
     - [Improved entropy](#improved-entropy)
     - [Turn off swap](#turn-off-swap)
     - [Install tomb](#install-tomb)
+- [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
+
+---
 
 # Before starting
 
@@ -58,7 +64,7 @@ Follow these steps:
 
 From now I assume that all this has been done.
 
-# Vault qube configuration
+# Vault configuration
 
 As already mentioned I have a qube called _vault_ which handles secrets, passwords and GPG.
 
@@ -215,3 +221,7 @@ Then:
     cd ..
     rm -fR Tomb-2.5
 ```
+
+# joe-fsq and joe-devq configuration
+
+Both these qubes are simple Debian 10 AppVMs generated from the Debian 10 Template. They could be Debian 9 AppVMs (it would be better from the security standpoint) but the most common applications (like browser, file manager, email client ... ) wouldn't be much up to date.

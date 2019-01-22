@@ -15,6 +15,7 @@ permalink: get-started
     - [Improved entropy](#improved-entropy)
     - [Turn off swap](#turn-off-swap)
     - [Install tomb](#install-tomb)
+    - [Risks-scripts repository](#risks-scripts-repository)
 - [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
 
 ---
@@ -85,7 +86,7 @@ A neater way would be to download all the required .deb packages and the additio
 I like to install these general purpose packages:
 
 ``` bash
-    sudo apt install apt-file wipe coreutils locate tree pwgen
+    sudo apt install apt-file wipe coreutils locate tree pwgen git
 ```
 
 ## Software for secrecy
@@ -222,6 +223,18 @@ Then:
     rm -fR Tomb-2.5
 ```
 
+## Risks-scripts repository
+
+The last bit is to download the _risks-script_ repository.
+
+``` bash
+    git clone https://github.com/19hundreds/risks-scripts.git
+```
+
+I will then use `qvm-copy` to copy what I need to other qubes or dom0.
+
 # joe-fsq and joe-devq configuration
 
-Both these qubes are simple Debian 10 AppVMs generated from the Debian 10 Template. They could be Debian 9 AppVMs (it would be better from the security standpoint) but the most common applications (like browser, file manager, email client ... ) wouldn't be much up to date.
+Both the _joe-fsq_ and _joe-devq_ qubes are Debian 10 AppVMs generated from a Debian 10 Template which has no special features.
+
+They could be Debian 9 AppVMs (it would be better from the security standpoint) but the most common applications (like browser, file manager ... ) wouldn't be much up to date. From R.I.S.K.S. standpoint there would be no difference, all the commands and packages are the same.

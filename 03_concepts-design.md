@@ -201,7 +201,7 @@ Losing control over credentials leads to a total disaster. The gravity of the si
 
 Reusing credentials or passwords is always a horrible idea. It doesn't just weaken the security of the system it also represents a privacy threat: identical passwords can be used to spot the user's real identity.
 
-The root of credentials reuse is the fact that the user relies on memory but **in my experience the chances of forgetting credentials are several orders of magnitude higher than being hacked, attacked or victims of a theft**.
+The root of credentials reuse is the fact that the user relies on memory but **in my experience the chances of forgetting credentials are several orders of magnitude higher than being hacked, attacked or victim of a theft**.
 
 Credentials reuse also leads to short passwords which means weak password that can be easily guessed via brute force.
 
@@ -217,7 +217,7 @@ Passphrases can also be guessed by using brute force. This [article](https://www
 
 Good passphrases are absolutely mandatory but hard to remember passphrases are even worse than weak ones because they lead to passphrase loss.
 
-**In my experience the chances of forgetting a passphrase are several orders of magnitude higher than being hacked, attacked or victims of a theft**.
+**In my experience the chances of forgetting a passphrase are several orders of magnitude higher than being hacked, attacked or victim of a theft**.
 
 A good way to produce passphrases is to use [diceware](http://world.std.com/~reinhold/diceware.html). This is the technique I use.
 

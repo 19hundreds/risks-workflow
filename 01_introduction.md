@@ -3,14 +3,17 @@ title: Introduction
 permalink: /introduction
 ---
 
-- [About](#about)
-    - [Disclaimer](#disclaimer)
-    - [Contribute](#contribute)
-- [Why Qubes OS?](#why-qubes-os)
-    - [Why not Linux?](#why-not-linux)
-    - [Why not Windows or MacOS ?](#why-not-windows-or-macos-)
-    - [Can R.I.S.K.S. be adopted only in Qubes OS?](#can-risks-be-adopted-only-in-qubes-os)
+---
 
+- [About](#about)
+- [Disclaimer](#disclaimer)
+- [Contribute](#contribute)
+- [Why Qubes OS?](#why-qubes-os)
+- [Why not Linux?](#why-not-linux)
+- [Why not Windows or MacOS ?](#why-not-windows-or-macos-)
+- [Can R.I.S.K.S. be adopted only in Qubes OS?](#can-risks-be-adopted-only-in-qubes-os)
+
+---
 
 # About
 
@@ -24,7 +27,7 @@ The implications on freedom frighten me.
 
 This is my trigger. It has pushed me to investigate solutions and R.I.S.K.S. sums up part of what I've learned along the road.
 
-## Disclaimer
+# Disclaimer
 
 However, despite the efforts, R.I.S.K.S. can have flaws.
 
@@ -32,7 +35,7 @@ It also relies on encryption which in some areas of the world is forbidden and b
 
 Use this guide at your own risk and be wise. Good luck.
 
-## Contribute
+# Contribute
 
 Please share your doubts and **criticize** R.I.S.K.S.
 
@@ -46,7 +49,7 @@ Feel free to open an issue on [Github](https://github.com/19hundreds/password-ma
 
 # Why Qubes OS?
 
-[Qubes OS](https://www.qubes-os.org/) is a "reasonably secure operating system for personal computer". It's based on the Xen hypervisor and offers better security by compartmentalizing the user's activities in isolated Linux virtual machines called _qubes_.
+[Qubes OS](https://www.qubes-os.org/) is a "reasonably secure operating system for personal computer". It's based on the Xen hypervisor and offers better security by **compartmentalizing** the user's activities in isolated Linux virtual machines called _qubes_.
 
 The basic concept is that, by separating the daily activities and performing them in separated environments, the attack surface is smaller and minimizes the damages in case of accident.
 
@@ -56,16 +59,16 @@ More security and more privacy are default achievements right out the box for a 
 
 Unfortunately the learning curve can be quite steep (especially for those with no experience in linux) but its [documentation](https://www.qubes-os.org/doc/) is awesome.
 
-## Why not Linux?
+# Why not Linux?
 
 Qubes OS relies on Linux and all its qubes are based on Fedora. Who doesn't feel comfortable with non-debian based distributions _Debian_ qubes are available as well. So Linux is good part of Qubes.
 
 A regular Linux installation, out of the box, can't grant the level of security and privacy provided by Qubes OS.
 
-## Why not Windows or MacOS ?
+# Why not Windows or MacOS ?
 
 They are closed source operating systems and this means that they can't be trusted. And none should (in my opinion).
 
-## Can R.I.S.K.S. be adopted only in Qubes OS?
+# Can R.I.S.K.S. be adopted only in Qubes OS?
 
 No, it can be implemented also in Linux but the user has to do the extra mile to fit R.I.S.K.S. in the chosen Linux box.

@@ -3,12 +3,27 @@ title: Glossary
 permalink: /glossary
 ---
 
-For me good part of the difficulty of studying security comes from terminology. There is always that moment in which I confuse terms and I end up misunderstanding or being unclear.
+---
 
-Even while writing R.I.S.K.S. I often find myself using terms as synonymous when they are not, like password and passphrase and this is confusing.
+- [Qubes OS](#qubes-os)
+- [Secrecy and encryption](#secrecy-and-encryption)
+
+---
+
+For me, in the context of security, terminology is good part of the difficulty. There is always that moment in which I confuse terms and I end up misunderstanding or being unclear.
+
+While writing R.I.S.K.S. I often find myself using terms as synonymous when they are not, like password and passphrase. This is confusing and more dangerous than one might think.
 
 So I maintain a glossary of terms and I stick to these terms as strictly as I can.
 
+# Qubes OS
+
+| TERM                        | MEANING                                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| compartmentalization        | everything isolated in its proper box: _[divide and rule](https://en.wikipedia.org/wiki/Divide_and_rule)_           |
+| qube                        | a specific Qubes OS virtual machine. It's a [XEN](https://en.wikipedia.org/wiki/Xen) virtual machine                |
+
+# Secrecy and encryption
 
 | TERM                        | MEANING                                                                                                             |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------- |

@@ -8,7 +8,7 @@ permalink: /requirements
 - [Personal resources](#personal-resources)
 - [Hardware](#hardware)
 
---
+---
 
 If you are still reading there are some chances that you want to give R.I.S.K.S. a try.
 
@@ -52,6 +52,7 @@ R.I.S.K.S. requires:
 * an sdcard reader well supported by Linux (either embedded or USB device)
 * at least two empty sdcard (the size doesn't really matter. 4GB is common and more than enough)
 * a usb pen-drive at least as big as the sdcard
+* an external usb hard-drive
 
 Don't use the computer dedicated to Qubes OS for anything else. Avoid dual boot. For who's thinking to buy some second-hand dedicated pc I advise a Thinkpad. All X2* series have a Linux compliant sdcard reader and they can be bought online for a few hundreds dollars.
 

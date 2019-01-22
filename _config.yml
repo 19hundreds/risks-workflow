@@ -14,7 +14,8 @@ header_pages:
   - 01_introduction.md
   - 02_glossary.md
   - 03_concepts-design.md
-  - 04_requirements.md
+  - 04_under-the-hood.md
+  - 05_requirements.md
 
 # Social links
 github_username: 19hundreds

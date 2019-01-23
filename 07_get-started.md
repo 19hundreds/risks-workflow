@@ -16,6 +16,7 @@ permalink: get-started
     - [Turn off swap](#turn-off-swap)
     - [Install tomb](#install-tomb)
     - [Risks-scripts repository](#risks-scripts-repository)
+    - [Network-less vault](#network-less-vault)
 - [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
 
 ---
@@ -238,6 +239,14 @@ and copy `risks` to some `${PATH}`
 ```
 
 I will then use `qvm-copy` to copy what I need to other qubes or dom0.
+
+## Network-less vault
+
+From now on _vault_ shouldn't be connected to any network so, from dom0 terminal:
+
+``` bash
+    qvm-prefs vault netvm none
+```
 
 # joe-fsq and joe-devq configuration
 

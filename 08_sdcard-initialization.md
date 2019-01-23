@@ -66,14 +66,14 @@ When I hover over it, it pops up a submenu showing the running VMs to which I ca
 
 I click on _vault_ and the sdcard is attached.
 
-Something like this pops up in the syslog of the vault:
+Something like this pops up in the syslog of the _vault_:
 
 ``` bash
     blkfront: xvdi: barrier or flush: disabled; persistent grants: enabled; indirect descriptors: enabled;
     **xvdi: xvdi1**
 ```
 
-This means that the sdcard block is accessible to the vault as `/dev/xvdi`. To check if this is true:
+This means that the sdcard block is accessible to the _vault_ as `/dev/xvdi`. To check if this is true:
 
 ``` bash
 sudo fdisk -l /dev/xvdi
@@ -264,15 +264,15 @@ I write the UDEV rule this way:
     sudo service udev restart
 ```
 
-> Note: vault is a standalone qube (not an AppVM) so the changes to /etc/udev/rules.d/99-sdcard.rules will be persistent after a reboot
+> Note: _vault_ is a standalone qube (not an AppVM) so the changes to /etc/udev/rules.d/99-sdcard.rules will be persistent after a reboot
 
-From this moment, when I connect the sdcard to my vault it will be mapped to /dev/hush.
+From this moment, when I connect the sdcard to my _vault_ it will be mapped to /dev/hush.
 
 # Configure DOM0 script to attach sdcard
 
 R.I.S.K.S. has some non-mandatory scripts for dom0 meant to make my life easier.
 
-The script `attach_hush_to` attaches the _hush partition_ to the qube I want, normally vault.
+The script `attach_hush_to` attaches the _hush partition_ to the qube I want, normally _vault_.
 
 I copy `attach_hush_to` to dom0 with this command executed in a dom0 terminal:
 
@@ -309,6 +309,6 @@ At this point I can run from dom0:
     attach_hush_to vault
 ```
 
-and the _hush partition_ is mounted in vault as `/dev/hush`.
+and the _hush partition_ is seen by _vault_ as `/dev/hush`.
 
 Alternatively I can attach it manually using Qubes Device Widget. It's technically equivalent but there are less automatic checks.

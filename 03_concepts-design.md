@@ -213,13 +213,15 @@ R.I.S.K.S. uses a combination of `pass` and `mpw` to provide credentials managem
 
 Passphrases are crucial. The advent of crypto-currency makes them even more important.
 
-Passphrases can also be guessed by using brute force. This [article](https://www.bfoliver.com/technology/2015/10/20/bruteforcegpg/) explains how Ben Oliver succeeded in brute forcing his own GPG passphrase.
+Passphrases can be guessed by using brute force so, if every possible password is tried, sooner or later the right one will be found. The question is: Will that be too soon . . . or enough later?
+
+This [article](https://www.bfoliver.com/technology/2015/10/20/bruteforcegpg/) explains how Ben Oliver succeeded in brute forcing his own GPG passphrase.
 
 Good passphrases are absolutely mandatory but hard to remember passphrases are even worse than weak ones because they lead to passphrase loss.
 
 **In my experience the chances of forgetting a passphrase are several orders of magnitude higher than being hacked, attacked or victim of a theft**.
 
-A good way to produce passphrases is to use [diceware](http://world.std.com/~reinhold/diceware.html). This is the technique I use.
+A good tool for producing a passphrase is [diceware](http://world.std.com/~reinhold/diceware.html). This is the technique I use.
 
 Six word passphrases or longer are advised, something like:
 

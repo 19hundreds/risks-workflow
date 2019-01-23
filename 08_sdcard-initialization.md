@@ -156,14 +156,7 @@ This partition is now ready to be mounted and filled in with irrelevant data
 
 # Setup the hush partition
 
-I choose the [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup) filesystem to protect the content of the _hush partition_.
-
-> These are some references for deepening LUKS:
-* [Archlinux advanced dm-crypt guide](https://wiki.archlinux.org/index.php/Dm-crypt)
-* [Official cryptsetup FAQ](https://gitlab.com/cryptsetup/cryptsetup/wikis/FrequentlyAskedQuestions)
-* [About key-slots](https://www.lisenet.com/2013/luks-add-keys-backup-and-restore-volume-header/)
-
-During this process I will be asked to set the passphrase for the sdcard.
+I protect the content of the _hush partition_ with [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup).
 
 ``` bash
     sd_drive="/dev/xvdi"
@@ -309,6 +302,6 @@ At this point I can run from dom0:
     attach_hush_to vault
 ```
 
-and the _hush partition_ is seen by _vault_ as `/dev/hush`.
+and the _hush partition_ is now seen by _vault_ as `/dev/hush`.
 
 Alternatively I can attach it manually using Qubes Device Widget. It's technically equivalent but there are less automatic checks.

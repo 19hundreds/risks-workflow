@@ -5,7 +5,7 @@ permalink: get-started
 
 ---
 
-- [Before starting](#before-starting)
+- [Get ready](#get-ready)
     - [Isolated place](#isolated-place)
     - [Paper password](#paper-password)
 - [Get started](#get-started)
@@ -13,6 +13,7 @@ permalink: get-started
     - [Generic software](#generic-software)
     - [Software for secrecy](#software-for-secrecy)
     - [Improved entropy](#improved-entropy)
+    - [Disable bash history](#disable-bash-history)
     - [Turn off swap](#turn-off-swap)
     - [Install tomb](#install-tomb)
     - [Risks-scripts repository](#risks-scripts-repository)
@@ -22,7 +23,7 @@ permalink: get-started
 
 ---
 
-# Before starting
+# Get ready
 
 ## Isolated place
 
@@ -30,25 +31,54 @@ When working on R.I.S.K.S. be sure to be in a peaceful and isolated environment 
 
 ## Paper password
 
-Writing down passphrases on paper is usually not a good idea. However it's a mandatory step until there is a better place where to store them: the risk is to be locked out of the system.
+Writing down passphrases on paper is usually not a good idea but I believe it's still good until there is a better place where to store them.
 
-I have the habit of creating passphrases (diceware) before starting the encryption process and I write them down on paper. I call it _password paper_.
+At least it prevents the worst risk: being locked out.
+
+I have the habit of creating passphrases before starting the encryption process and I write them down on what I call _password paper_.
 
 I memorize the passphrases by repeating them by heart hundreds times until I feel confident that I won't forget them anymore.
 
 I mentally repeat my passwords on daily basis even if I'm not using my devices. It has become a traffic-light habit.
 
-When I'm done with the software configuration I destroy the password paper by shredding it and flushing it down the toilet.
-
 Soon you'll need:
 
-* one passphrase for Qubes OS filesystem (diceware 6 words)
-* one passphrase for the sdcard (diceware 6 words)
-* one passphrase for Joe's GPG (diceware 6 words)
-* one master password for `mpw` * (length >= 14)
-* one password for the Qubes user (length >= 8)
+* a passphrase for Qubes OS filesystem
+* a passphrase for the sdcard
+* a passphrase for Joe's GPG
+* a master password for `mpw`
+* a password for the Qubes user
 
-Each passphrase must be different. Eventually the two passwords can match but I don't advise it.
+Each passphrase and password must be different.
+
+Each passphrase and password difficulty must be calibrated accordingly to the environmental risk.
+
+For example the difficulty of the Qubes user's password depends on the chances to have someone hacking the pc meanwhile it's locked with the screensaver.
+
+This is an example of how my _password paper_ looks like.
+
+**SYSTEM**
+
+| DESCRIPTION                               | PASSPHRASE                                 |
+| ----------------------------------------- | ------------------------------------------ |
+| Qubes OS partition                        | man smiles in front ## fireplace           |
+| Qubes user                                | boring puzzword                            |
+| HUSH partition                            | cat climbs tree dog pisses tree            |
+| MPW master password                       | fly smacks glass =*                        |
+
+
+**GPG**
+
+| DESCRIPTION                               | PASSPHRASE                                 |
+| ----------------------------------------- | ------------------------------------------ |
+| JOE's GPG coffin                          | knapp tiber fist lush hatred we're         |
+| ...                                       | ...                                        |
+| MIKE's GPG coffin                         | cleft cam synod lacy yr wok                |
+
+
+
+
+When I'm done with the software configuration I destroy the password paper by shredding it and flushing it down the toilet.
 
 # Get started
 
@@ -172,6 +202,19 @@ Output
 
 Look for _rngtest: FIPS 140-2 successes_: it should score as close as possible to 1000.
 
+## Disable bash history
+
+Bash keeps a very comfortable log (called bash history) of the commands typed by the user in any terminal.
+
+In _vault_ though I prefer to disable bash history so that it's not so obvious to see the commands I'm using.
+
+``` bash
+    echo 'unset HISTFILE' >> .bashrc
+    source .bashrc
+    wipe -f .bash_history
+```
+With this configuration bash remembers only the commands typed in the current session. They are lost when the qube is restarted.
+
 ## Turn off swap
 
 I turn off swap to prevent that something can be written in the swap area and later recovered by an attacker. It's also a Tomb requirement.
@@ -192,6 +235,7 @@ The swap size is 0B. Good.
 I make this permanent by modifying the `rc.local` script
 
 ```bash
+    sudo sh -c "sed 's/bin\/sh/bin\/bash/g' -i /rw/config/rc.local"
     sudo sh -c 'echo "swapoff -a" >> /rw/config/rc.local'
 ```
 
@@ -257,6 +301,8 @@ So, from _vault_ terminal:
 
 ``` bash
     echo '
+    #!/bin/bash
+
     # Hush partition: where the keys are store
     export SDCARD_ENC_PART="/dev/hush"
 
@@ -276,7 +322,7 @@ So, from _vault_ terminal:
     export PASSWORD_STORE_ENABLE_EXTENSIONS=true
     export PASSWORD_STORE_GENERATED_LENGTH=12
 
-    # GPG SPLIT configuration: QUBES_GPG_ACCEPT must be in ~/.bash_profile
+    # GPG SPLIT configuration: QUBES_GPG_ACCEPT must be set in /etc/profile.d/qubes-gpg.sh
     ' >> ~/.bashrc
 
     source ~/.bashrc

@@ -12,8 +12,10 @@ permalink: /under-the-hood
     - [Sdcard and keys](#sdcard-and-keys)
     - [Secrets: coffins and tombs](#secrets-coffins-and-tombs)
     - [Credentials and passphrases](#credentials-and-passphrases)
-- [Real life example](#real-life-example)
+- [RISKS workflow without SSL & MPW password](#risks-workflow-without-ssl--mpw-password)
     - [How much mnemonic effort is that?](#how-much-mnemonic-effort-is-that)
+- [RISKS workflow with SSL & MPW password](#risks-workflow-with-ssl--mpw-password)
+    - [How much mnemonic effort is that?](#how-much-mnemonic-effort-is-that-1)
 
 <!-- /TOC -->
 ---
@@ -85,20 +87,22 @@ In the _coffin-file_ I store just the GPG-files of the identity (Joe). One _coff
 The _coffin-file_ uses a binary key-file without passphrase (passphrase-less) stored inside the _hush-partition_. Opening a coffin-file requires no mnemonic effort and it's done with a passphrase-less script (`risq`). When a _coffin-file_ is open, _vault_ is able to provide GPG functionality to any other qube.
 
 In _tomb-files_ I usually store generic secret files and directories of files. Each one is protected by a different GPG encrypted binary key stored in the _hush-partition_.
-Opening a _tomb-file_ requires both the binary key and the GPG passphrase. This means that no _tomb-file_ can be opened until a _coffin-file_ is opened in the _vault_ qube.
+Opening a _tomb-file_ requires both the binary key and the GPG decryption, which requires to provide a passphrase.
+
+This means that no _tomb-file_ can be opened until the right _coffin-file_ is opened in the _vault_ qube and GPG is fully configured.
 
 Basically the _vault_ qube is configured with the GPG-split technique (and other split-techniques) which lets other qubes to access the _vault_ GPG agent after the Qubes OS authorization step is cleared (it asks for the GPG-passphrase).
 
-Both the _coffin-file_ and the _tomb-file_ can be managed inside the _vault_ qube with `risks`.
+I can manage both the _coffin-file_ and the _tomb-file_ inside the _vault_ qube using `risks` while, inside any other authorized _qube_ I can manage just _tomb-files_ with `risq`.
 
-Inside any other authorized _qube_ I can manage just _tomb-files_ with `risq`.
+> Note1: Using passphrase-less _coffin-files_ means that who can open the _hush-partition_ can also access my _coffins_. This is indeed a weak point not so weak as it seems because GPG is also protected by its passphrase. This is why GPG passphrases must be strong and well done.
 
-Using passphrase-less _coffin-files_ means that who can open the _hush-partition_ can also access my _coffins_. This is indeed a weak point not so weak as it seems because GPG is also protected by its passphrase. This is why GPG passphrases must be strong and well done.
+> Note2: When the number of identities is big enough, the required mnemonic effort could become dangerously high (one passphrase per identity). Optionally, although advised, I can decide to store the GPG passphrases inside the _hush-partition_ in a file encrypted via SSL and AES-256. Then I can retrieve them with `risks` by providing the `mpw` password (or any other password I want to use).
+
 
 ## Credentials and passphrases
 
 I manage the _pass-files_ for each identity with `pass`. In most of the cases I use `mpw` seamlessly within `pass`.
-
 
 This grants R.I.S.K.S. credentials management to match these features:
 
@@ -106,7 +110,7 @@ This grants R.I.S.K.S. credentials management to match these features:
 * I need just one master password for all the identities but each pass-tomb-file is protected by a different GPG
 * password-files follow a lean scheme with very few rules. This allows to store any kind of text and offers maximum freedom
 
-# Real life example
+# RISKS workflow without SSL & MPW password
 
 This is what I do when I need to work with identity _Joe_:
 
@@ -117,9 +121,9 @@ This is what I do when I need to work with identity _Joe_:
 5.  I plug in the sdcard in the socket
 6.  I connect the sdcard to _vault_
 7.  I insert the passphrase to decrypt the sdcard
-8.  I decrypt Joe's _identity-coffin_ using a script (`risks`)
-9.  I access Joe's pass-files using his GPG passphrase and, eventually, the `mpw` master password
-10. I access any of Joe's _tomb-files_ using his GPG passphrase
+8.  I decrypt Joe's _identity-coffin_ using a script (`risks`) and no passphrase
+9.  I access any of Joe's _tomb-files_ using Joe's GPG passphrase
+10. I access Joe's passwords using `pass` and eventually `mpw` (which requires a password)
 
 ## How much mnemonic effort is that?
 
@@ -129,23 +133,60 @@ Let's measure it:
 * one password for the Qubes user (step 3)
 * one passphrase for the sdcard (step 7)
 * one GPG passphrase for each identity (step 9 and 10)
-* one master password (for all the identities) for `mpw` (step 9 and 10)
+* one master password (for all the identities) for `mpw` (10)
 
 => if I have 1 identities I need to remember:
 
 * 3 passphrases   (Qubes fs, sdcard, GPG)
-* 2 passwords     (Qubes user, master password)
+* 2 passwords     (Qubes user, mpw master password)
 
 => if I have 2 identities I need to remember:
 
 * 4 passphrases   (Qubes fs, sdcard, 2 x GPG)
-* 2 passwords     (Qubes user, master password)
+* 2 passwords     (Qubes user, mwp master password)
 
 => if I have 3 identities I need to remember:
 
 * 5 passphrases   (Qubes fs, sdcard, 3 x GPG)
-* 2 passwords     (Qubes user, master password)
+* 2 passwords     (Qubes user, mpw master password)
 
 This is the formula:
 
 > 2 passwords + (#number_of_identities + 2) passphrases
+
+The annoying part is that the total number of GPG passphrases required increases with the number of identities.
+
+# RISKS workflow with SSL & MPW password
+
+This is what I do when I need to work with identity _Joe_:
+
+1.  I turn on my Qubes OS pc
+2.  I insert the Qubes OS filesystem passphrase
+3.  I login as Qubes user
+4.  I load the _vault_ qube
+5.  I plug in the sdcard in the socket
+6.  I connect the sdcard to _vault_
+7.  I insert the passphrase to decrypt the sdcard
+8.  I decrypt Joe's _identity-coffin_ using a script (`risks`) and no passphrase
+9.  I access any of Joe's _tomb-files_ using a script (`risks` + `mpw` master password)
+10. I access Joe's passwords using `pass` and eventually `mpw` (which requires a password)
+
+## How much mnemonic effort is that?
+
+* one passphrase right after boot (step 2)
+* one password for the Qubes user (step 3)
+* one passphrase for the sdcard (step 7)
+* one master password (for all the identities) for `mpw` (step 9 and 10)
+
+=> if I have 1 identities I need to remember:
+
+* 2 passphrases   (Qubes fs, sdcard)
+* 2 passwords     (Qubes user, mpw master password)
+
+=> if I have 2 identities I need to remember:
+
+* 2 passphrases   (Qubes fs, sdcard)
+* 2 passwords     (Qubes user, mpw master password)
+
+In this case the number doesn't change when the number of identities changes.
+The annoying part is that it requires one more step when dealing with GPG authorization.

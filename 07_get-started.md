@@ -225,10 +225,16 @@ Then:
 
 ## Risks-scripts repository
 
-The last bit is to download the _risks-script_ repository.
+The last bit is to download the _risks-script_ repository:
 
 ``` bash
     git clone https://github.com/19hundreds/risks-scripts.git
+```
+
+and copy `risks` to some `${PATH}`
+
+``` bash
+    sudo cp risks-scripts/vault/risks /usr/local/bin/
 ```
 
 I will then use `qvm-copy` to copy what I need to other qubes or dom0.

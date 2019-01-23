@@ -158,7 +158,7 @@ This partition is now ready to be mounted and filled in with irrelevant data
 
 I choose the [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup) filesystem to protect the content of the _hush partition_.
 
-> These are some valid references for deepening LUKS:
+> These are some references for deepening LUKS:
 * [Archlinux advanced dm-crypt guide](https://wiki.archlinux.org/index.php/Dm-crypt)
 * [Official cryptsetup FAQ](https://gitlab.com/cryptsetup/cryptsetup/wikis/FrequentlyAskedQuestions)
 * [About key-slots](https://www.lisenet.com/2013/luks-add-keys-backup-and-restore-volume-header/)
@@ -272,16 +272,18 @@ From this moment, when I connect the sdcard to my vault it will be mapped to /de
 
 R.I.S.K.S. has some non-mandatory scripts for dom0 meant to make my life easier.
 
-The script `attach_sdcard_to` attaches the _hush partition_ to the qube I want, normally vault.
+The script `attach_hush_to` attaches the _hush partition_ to the qube I want, normally vault.
 
-I copy `attach_sdcard_to` to dom0 with this command executed in a dom0 terminal:
+I copy `attach_hush_to` to dom0 with this command executed in a dom0 terminal:
 
 ``` bash
-    qvm-run --pass-io vault 'cat /home/user/risks-scripts/dom0/attach_sdcard_to' > /usr/local/bin/
-    chmod +x /usr/local/bin/attach_sdcard_to
+    cd
+    qvm-run --pass-io vault 'cat /home/user/risks-scripts/dom0/attach_hush_to' > attach_hush_to
+    sudo mv attach_hush_to /usr/local/sbin/
+    sudo chmod +x /usr/local/sbin/attach_hush_to
 ```
 
-Still in dom0 I add this to `~/.bashrc` so that `attach_sdcard_to` has its global vars configured:
+Still in dom0 I add this to `~/.bashrc` so that `attach_hush_to` has its global vars configured:
 
 ``` bash
     echo '
@@ -304,7 +306,7 @@ or this, if Qubes OS is configured to use a USB keyboard at boot
 At this point I can run from dom0:
 
 ```bash
-    attach_sdcard_to vault
+    attach_hush_to vault
 ```
 
 and the _hush partition_ is mounted in vault as `/dev/hush`.

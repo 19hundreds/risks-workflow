@@ -17,6 +17,7 @@ permalink: get-started
     - [Install tomb](#install-tomb)
     - [Risks-scripts repository](#risks-scripts-repository)
     - [Network-less vault](#network-less-vault)
+    - [Vault global vars](#vault-global-vars)
 - [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
 
 ---
@@ -226,7 +227,7 @@ Then:
 
 ## Risks-scripts repository
 
-The last bit is to download the _risks-script_ repository:
+Now it's time to download the _risks-script_ repository:
 
 ``` bash
     git clone https://github.com/19hundreds/risks-scripts.git
@@ -246,6 +247,39 @@ From now on _vault_ shouldn't be connected to any network so, from dom0 terminal
 
 ``` bash
     qvm-prefs vault netvm none
+```
+
+## Vault global vars
+
+There are some global variables for _vault_ used to configure several scripts involved in R.I.S.K.S. and it's convenient to declare them already.
+
+So, from _vault_ terminal:
+
+``` bash
+    echo '
+    # Hush partition: where the keys are store
+    export SDCARD_ENC_PART="/dev/hush"
+
+    # Mapper for hush partition
+    export SDCARD_ENC_PART_MAPPER="hush"
+
+    #Mount sound enabled: 0 / disabled: 1
+    export SDCARD_QUIET=0
+
+    # Keys mount point: where the hush partition is mounted
+    export HUSH_DIR="${HOME}/.hush"
+
+    # Data directory: where coffin-files and tomb-files are stored
+    export GRAVEYARD="${HOME}/.graveyard"
+
+    # PASS
+    export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+    export PASSWORD_STORE_GENERATED_LENGTH=12
+
+    # GPG SPLIT configuration: QUBES_GPG_ACCEPT must be in ~/.bash_profile
+    ' >> ~/.bashrc
+
+    source ~/.bashrc
 ```
 
 # joe-fsq and joe-devq configuration

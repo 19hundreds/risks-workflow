@@ -125,7 +125,7 @@ This some security-focused software:
 
 ``` bash
 sudo apt update
-sudo apt install cryptsetup pass gnupg2 qubes-gpg-split e2fsprogs steghide pass xclip
+sudo apt install cryptsetup pass gnupg2 qubes-gpg-split e2fsprogs steghide pass xclip libsodium18 libtinfo5
 ```
 
 > WARNING: the GPG version must be >= 2.1 `apt-cache show gnupg2 | grep -i version`
@@ -133,6 +133,10 @@ sudo apt install cryptsetup pass gnupg2 qubes-gpg-split e2fsprogs steghide pass 
 I install `e2fsprogs` because I need `chattr`.
 
 I install `xclip` so that I can copy passphrases and passwords in the clipboard. It's optionally used by `pass` and a requirement for `risks`.
+
+`libsodium18` and `libtinfo5` are required for compiling `mpw` later on.
+
+> Different Debian versions use different libraries so the final number might change.
 
 I also install `sox` (which contains `play`) because I like to hear some sound when the sdcard is mounted or dismounted. This is optional.
 

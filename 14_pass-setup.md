@@ -3,20 +3,23 @@ title: PASS setup
 permalink: pass-setup
 ---
 
+---
+<!-- TOC -->
+
 - [Tomb file for pass](#tomb-file-for-pass)
-- [Install pass](#install-pass)
 - [Initialize password-store](#initialize-password-store)
-- [mpw extension for pass](#mpw-extension-for-pass)
 - [pass-split configuration](#pass-split-configuration)
-- [vault configuration](#vault-configuration)
-- [dom0 configuration](#dom0-configuration)
-- [template configuration](#template-configuration)
-- [joe-devq configuration](#joe-devq-configuration)
+    - [vault configuration](#vault-configuration)
+    - [dom0 configuration](#dom0-configuration)
+    - [template configuration](#template-configuration)
+    - [joe-devq configuration](#joe-devq-configuration)
 - [Usage](#usage)
 
+<!-- /TOC -->
+
+---
 
 It's now time to configure `pass` the credentials-manager.
-
 
 # Tomb file for pass
 
@@ -50,6 +53,19 @@ pass init ${RECIPIENT}
 I can now start using `pass` and save my website credentials (or any kind of note) with it.
 
 > Check `man pass` for more details.
+
+This is just a sample of how a pass-file looks like:
+
+``` bash
+123#stha36ea93-1
+---
+domain: www.reddit.com
+username: joe@foo.bar
+url: https://www.reddit.com
+
+```
+
+The password is always saved in the first line of the file.
 
 # pass-split configuration
 

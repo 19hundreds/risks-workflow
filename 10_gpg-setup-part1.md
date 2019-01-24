@@ -203,7 +203,7 @@ gpg: revocation certificate stored as '/home/user/.gnupg/openpgp-revocs.d/72052A
 gpg: done
 ```
 
-I wipe the `primary_key_unattended` file:
+I wipe away the `primary_key_unattended` file:
 
 ``` bash
 wipe ${RAMDISK}/primary_key_unattended

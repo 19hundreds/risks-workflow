@@ -181,6 +181,14 @@ tree
         └── public-primary-keypair.arm.key
 ```
 
+I make all the files immutable:
+
+``` bash
+sudo chattr +i ${MOUNT_POINT}/graveyard/*
+sudo chattr +i ${MOUNT_POINT}/hush.img
+sudo chattr +i ${MOUNT_POINT}/gpg/${IDENTITY}/*
+```
+
 The backup stage is finished
 
 ``` bash

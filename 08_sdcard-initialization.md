@@ -252,8 +252,8 @@ This is string unmistakably identifies the _hush partition_.
 I write the UDEV rule this way:
 
 ``` bash
-UUID=$(sudo cryptsetup luksUUID $sd_enc_part)
-sudo sh -c 'echo SUBSYSTEM=="block", ENV{ID_FS_UUID}==\"'${UUID}'\", RUN+="/usr/bin/logger --tag SD Card: Hush partition found. Linking it to /dev/hush ", SYMLINK+="hush" > /etc/udev/rules.d/99-sdcard.rules'
+UUID=$(sudo cryptsetup luksUUID ${sd_enc_part})
+sudo sh -c 'echo SUBSYSTEM==\"block\", ENV{ID_FS_UUID}==\"'${UUID}'\", SYMLINK+=\"hush\" > /etc/udev/rules.d/99-sdcard.rules'
 sudo service udev restart
 ```
 

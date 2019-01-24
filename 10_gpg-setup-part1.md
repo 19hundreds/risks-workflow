@@ -291,7 +291,7 @@ Output:
 I can either copy if from the terminal (and manually remove all the spaces) or be lazy and use this command:
 
 ``` bash
-fingerprint=$(gpg -K | grep fingerprint | cut -d= -f2 | sed 's/ //g')
+fingerprint=$(gpg -K | grep fingerprint | head -n 1 | cut -d= -f2 | sed 's/ //g')
 echo ${fingerprint}
 ```
 
@@ -515,6 +515,7 @@ risks gpgpass ${IDENTITY}
 
 I should be able to see again _"knapp tiber fist lush hatred we're"_. This is the command I use before opening any
 
+---
 
 # Coffin creation
 
@@ -534,13 +535,13 @@ IDENTITY="joe"
 head -c 512 < /dev/urandom > ${HUSH_DIR}/${IDENTITY}-gpg.key
 ```
 
-Alternatively I can use a human readable random key:
+Alternatively I can use a human readable random key (in case I want to transform it in a printable QRcode):
 
 ``` bash
 pwgen -y -s -C 64 > ${HUSH_DIR}/${IDENTITY}-gpg.key
 ```
 
-I immediately protect the key against accidental deletion or change by making it immutable:
+I immediately protect the key against accidental deletion or changes by making it immutable:
 
 ``` bash
 sudo chattr +i ${HUSH_DIR}/${IDENTITY}-gpg.key
@@ -682,7 +683,6 @@ The GPG keys shouldn't be modified nor deleted, especially by mistake, so I make
 
 ``` bash
 risks open gpg ${IDENTITY}
-sudo chattr +i ${HUSH_DIR}/${IDENTITY}-gpg.key
 sudo chattr +i ${TMP}/private-keys-v1.d/*
 sudo chattr +i ${TMP}/openpgp-revocs.d/*
 ```

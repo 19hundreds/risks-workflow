@@ -67,20 +67,24 @@ On top of this it features a reliable history and a supporting community.
 
 This is an example of a decrypted pass-file.
 
-    > pass website--com
+``` bash
+pass website--com
 
-    1Pe4Hpz-sc637tsaKk
-    ---
-    username: user@youremail.com
+1Pe4Hpz-sc637tsaKk
+---
+username: user@youremail.com
+```
 
 The first line is the password and below it any kind of information can be stored.
 
 This content is stored in _.gpg_ file inside the directory `~/.password-store` which looks like this:
 
-    /home/user/.password-store/
-    ├── website--com.gpg
-    ├── addons.example.com.gpg
-    ├── anyname-any_format.IwantHere.gpg
+``` bash
+/home/user/.password-store/
+├── website--com.gpg
+├── addons.example.com.gpg
+├── anyname-any_format.IwantHere.gpg
+```
 
 `pass` supports git and this means that the content of `~/.password-store` can be versioned and distributed on different machines.
 

@@ -6,19 +6,19 @@ permalink: get-started
 ---
 
 - [Get ready](#get-ready)
-    - [Isolated place](#isolated-place)
-    - [Paper password](#paper-password)
+- [Isolated place](#isolated-place)
+- [Paper password](#paper-password)
 - [Get started](#get-started)
 - [Vault configuration](#vault-configuration)
-    - [Generic software](#generic-software)
-    - [Software for secrecy](#software-for-secrecy)
-    - [Improved entropy](#improved-entropy)
-    - [Disable bash history](#disable-bash-history)
-    - [Turn off swap](#turn-off-swap)
-    - [Install tomb](#install-tomb)
-    - [Risks-scripts repository](#risks-scripts-repository)
-    - [Network-less vault](#network-less-vault)
-    - [Vault global vars](#vault-global-vars)
+- [Generic software](#generic-software)
+- [Software for secrecy](#software-for-secrecy)
+- [Improved entropy](#improved-entropy)
+- [Disable bash history](#disable-bash-history)
+- [Turn off swap](#turn-off-swap)
+- [Install tomb](#install-tomb)
+- [Risks-scripts repository](#risks-scripts-repository)
+- [Network-less vault](#network-less-vault)
+- [Vault global vars](#vault-global-vars)
 - [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
 
 ---
@@ -67,15 +67,13 @@ This is an example of how my _password paper_ looks like.
 | MPW master password                       | fly smacks glass =*                        |
 
 
-**CAN BE FORGOTTEN**
+**CAN BE FORGOTTEN** (if openssl is used, see later)
 
 | DESCRIPTION                               | PASSPHRASE                                 |
 | ----------------------------------------- | ------------------------------------------ |
 | JOE's GPG coffin                          | knapp tiber fist lush hatred we're         |
 | ...                                       | ...                                        |
 | MIKE's GPG coffin                         | cleft cam synod lacy yr wok                |
-
-
 
 
 When I'm done with the software configuration I destroy the password paper by shredding it and flushing it down the toilet.
@@ -118,7 +116,7 @@ A neater way would be to download all the required .deb packages and the additio
 I like to install these general purpose packages:
 
 ``` bash
-    sudo apt install apt-file wipe coreutils locate tree pwgen git
+sudo apt install apt-file wipe coreutils locate tree pwgen git
 ```
 
 ## Software for secrecy
@@ -126,8 +124,8 @@ I like to install these general purpose packages:
 This some security-focused software:
 
 ``` bash
-    sudo apt update
-    sudo apt install cryptsetup pass gnupg2 qubes-gpg-split e2fsprogs steghide
+sudo apt update
+sudo apt install cryptsetup pass gnupg2 qubes-gpg-split e2fsprogs steghide
 ```
 
 > WARNING: the GPG version must be >= 2.1 `apt-cache show gnupg2 | grep -i version`
@@ -137,7 +135,7 @@ I install `e2fsprogs` because I need `chattr`
 I also install `sox` (which contains `play`) because I like to hear some sound when the sdcard is mounted or dismounted. This is optional.
 
 ```bash
-    apt install sox
+apt install sox
 ```
 
 ## Improved entropy
@@ -145,30 +143,30 @@ I also install `sox` (which contains `play`) because I like to hear some sound w
 The `haveged` service increases the system's entropy. Higher entropy improves the quality of the keys during their generation.
 
 ``` bash
-    sudo apt install haveged rng-tools
+sudo apt install haveged rng-tools
 ```
 
 I check that the haveged service is running:
 
 ``` bash
-    sudo systemctl is-active haveged.service
+sudo systemctl is-active haveged.service
 ```
 Output:
 
 ``` bash
-    active
+active
 ```
 
 I check how much entropy my system is capable to generate:
 
 ``` bash
-    cat /proc/sys/kernel/random/entropy_avail
+cat /proc/sys/kernel/random/entropy_avail
 ```
 
 Output:
 
 ``` bash
-    2113
+2113
 ```
 
 The value ranges between 0 and 4096. The higher the better. (`man random.4` -> entropy_avail). 2113 is probably not great but it seems ok.
@@ -176,28 +174,28 @@ The value ranges between 0 and 4096. The higher the better. (`man random.4` -> e
 Now, I test my entropy level with `rngtest`:
 
 ``` bash
-    cat /dev/random | rngtest -c 1000
+cat /dev/random | rngtest -c 1000
 ```
 
 Output
 
 ``` bash
-    rngtest 2-unofficial-mt.14
-    Copyright (c) 2004 by Henrique de Moraes Holschuh
-    This is free software; see the source for copying conditions.  There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+rngtest 2-unofficial-mt.14
+Copyright (c) 2004 by Henrique de Moraes Holschuh
+This is free software; see the source for copying conditions.  There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-    rngtest: starting FIPS tests...
-    rngtest: bits received from input: 20000032
-    rngtest: FIPS 140-2 successes: 1000
-    rngtest: FIPS 140-2 failures: 0
-    rngtest: FIPS 140-2(2001-10-10) Monobit: 0
-    rngtest: FIPS 140-2(2001-10-10) Poker: 0
-    rngtest: FIPS 140-2(2001-10-10) Runs: 0
-    rngtest: FIPS 140-2(2001-10-10) Long run: 0
-    rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
-    rngtest: input channel speed: (min=1.241; avg=35.026; max=19073.486)Mibits/s
-    rngtest: FIPS tests speed: (min=2.612; avg=33.875; max=87.493)Mibits/s
-    rngtest: Program run time: 1116847 microseconds
+rngtest: starting FIPS tests...
+rngtest: bits received from input: 20000032
+rngtest: FIPS 140-2 successes: 1000
+rngtest: FIPS 140-2 failures: 0
+rngtest: FIPS 140-2(2001-10-10) Monobit: 0
+rngtest: FIPS 140-2(2001-10-10) Poker: 0
+rngtest: FIPS 140-2(2001-10-10) Runs: 0
+rngtest: FIPS 140-2(2001-10-10) Long run: 0
+rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
+rngtest: input channel speed: (min=1.241; avg=35.026; max=19073.486)Mibits/s
+rngtest: FIPS tests speed: (min=2.612; avg=33.875; max=87.493)Mibits/s
+rngtest: Program run time: 1116847 microseconds
 ```
 
 Look for _rngtest: FIPS 140-2 successes_: it should score as close as possible to 1000.
@@ -209,9 +207,9 @@ Bash keeps a very comfortable log (called bash history) of the commands typed by
 In _vault_ though I prefer to disable bash history so that it's not so obvious to see the commands I'm using.
 
 ``` bash
-    echo 'unset HISTFILE' >> .bashrc
-    source .bashrc
-    wipe -f .bash_history
+echo 'unset HISTFILE' >> .bashrc
+source .bashrc
+wipe -f .bash_history
 ```
 With this configuration bash remembers only the commands typed in the current session. They are lost when the qube is restarted.
 
@@ -219,15 +217,15 @@ With this configuration bash remembers only the commands typed in the current se
 
 I turn off swap to prevent that something can be written in the swap area and later recovered by an attacker. It's also a Tomb requirement.
 
-    sudo swapoff -a
+sudo swapoff -a
 
 I test that the swap if off:
 
 ```
-    free -h
-                total        used        free      shared  buff/cache   available
-    Mem:           465M        203M         36M        6.2M        225M        243M
-    Swap:            0B          0B          0B
+free -h
+            total        used        free      shared  buff/cache   available
+Mem:           465M        203M         36M        6.2M        225M        243M
+Swap:            0B          0B          0B
 ```
 
 The swap size is 0B. Good.
@@ -235,8 +233,8 @@ The swap size is 0B. Good.
 I make this permanent by modifying the `rc.local` script
 
 ```bash
-    sudo sh -c "sed 's/bin\/sh/bin\/bash/g' -i /rw/config/rc.local"
-    sudo sh -c 'echo "swapoff -a" >> /rw/config/rc.local'
+sudo sh -c "sed 's/bin\/sh/bin\/bash/g' -i /rw/config/rc.local"
+sudo sh -c 'echo "swapoff -a" >> /rw/config/rc.local'
 ```
 
 ## Install tomb
@@ -244,16 +242,16 @@ I make this permanent by modifying the `rc.local` script
 Tomb requires some additional packages:
 
 ```bash
-    sudo apt-get install pinentry-curses zsh
+sudo apt-get install pinentry-curses zsh
 ```
 
 Tomb doesn't have a debian package but it's just a collection of bash scripts and so the installation is smooth.
 
 ```bash
-    cd /tmp
-    wget -c https://files.dyne.org/tomb/Tomb-2.5.tar.gz
-    wget -c https://files.dyne.org/tomb/Tomb-2.5.tar.gz.sha
-    sha256sum -c Tomb-2.5.tar.gz.sha
+cd /tmp
+wget -c https://files.dyne.org/tomb/Tomb-2.5.tar.gz
+wget -c https://files.dyne.org/tomb/Tomb-2.5.tar.gz.sha
+sha256sum -c Tomb-2.5.tar.gz.sha
 ```
 Output:
 
@@ -262,11 +260,11 @@ Output:
 Then:
 
 ```bash
-    tar xvfz Tomb-2.5.tar.gz
-    cd Tomb-2.5
-    sudo make install
-    cd ..
-    rm -fR Tomb-2.5
+tar xvfz Tomb-2.5.tar.gz
+cd Tomb-2.5
+sudo make install
+cd ..
+rm -fR Tomb-2.5
 ```
 
 ## Risks-scripts repository
@@ -274,13 +272,13 @@ Then:
 Now it's time to download the _risks-script_ repository:
 
 ``` bash
-    git clone https://github.com/19hundreds/risks-scripts.git
+git clone https://github.com/19hundreds/risks-scripts.git
 ```
 
 and copy `risks` to some `${PATH}`
 
 ``` bash
-    sudo cp risks-scripts/vault/risks /usr/local/bin/
+sudo cp risks-scripts/vault/risks /usr/local/bin/
 ```
 
 I will then use `qvm-copy` to copy what I need to other qubes or dom0.
@@ -290,7 +288,7 @@ I will then use `qvm-copy` to copy what I need to other qubes or dom0.
 From now on _vault_ shouldn't be connected to any network so, from dom0 terminal:
 
 ``` bash
-    qvm-prefs vault netvm none
+qvm-prefs vault netvm none
 ```
 
 ## Vault global vars
@@ -300,32 +298,32 @@ There are some global variables for _vault_ used to configure several scripts in
 So, from _vault_ terminal:
 
 ``` bash
-    echo '
-    #!/bin/bash
+echo '
+#!/bin/bash
 
-    # Hush partition: where the keys are store
-    export SDCARD_ENC_PART="/dev/hush"
+# Hush partition: where the keys are store
+export SDCARD_ENC_PART="/dev/hush"
 
-    # Mapper for hush partition
-    export SDCARD_ENC_PART_MAPPER="hush"
+# Mapper for hush partition
+export SDCARD_ENC_PART_MAPPER="hush"
 
-    #Mount sound enabled: 0 / disabled: 1
-    export SDCARD_QUIET=0
+#Mount sound enabled: 0 / disabled: 1
+export SDCARD_QUIET=0
 
-    # Keys mount point: where the hush partition is mounted
-    export HUSH_DIR="${HOME}/.hush"
+# Keys mount point: where the hush partition is mounted
+export HUSH_DIR="${HOME}/.hush"
 
-    # Data directory: where coffin-files and tomb-files are stored
-    export GRAVEYARD="${HOME}/.graveyard"
+# Data directory: where coffin-files and tomb-files are stored
+export GRAVEYARD="${HOME}/.graveyard"
 
-    # PASS
-    export PASSWORD_STORE_ENABLE_EXTENSIONS=true
-    export PASSWORD_STORE_GENERATED_LENGTH=12
+# PASS
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_GENERATED_LENGTH=12
 
-    # GPG SPLIT configuration: QUBES_GPG_ACCEPT must be set in /etc/profile.d/qubes-gpg.sh
-    ' >> ~/.bashrc
+# GPG SPLIT configuration: QUBES_GPG_ACCEPT must be set in /etc/profile.d/qubes-gpg.sh
+' >> ~/.bashrc
 
-    source ~/.bashrc
+source ~/.bashrc
 ```
 
 # joe-fsq and joe-devq configuration

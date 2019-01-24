@@ -63,15 +63,15 @@ The owner still has to revoke the stolen subkeys and the attacker can still use 
 
 From [debian-wiki](https://wiki.debian.org/Subkeys?action=show&redirect=subkeys):
 
-> You will need to use the master keys only in exceptional circumstances, namely when you want to modify your own or someone else's key. More specifically, you need the master private key:
+> You will need to use the master keys only in exceptional circumstances, namely when you want to modify your own or someone else's key. More specifically, you need the master private key when you:
 >
-> * when you sign someone else's key or revoke an existing signature,
-> * when you add a new UID or mark an existing UID as primary,
-> * when you create a new subkey,
-> * when you revoke an existing UID or subkey,
-> * when you change the preferences (e.g., with setpref) on a UID,
-> * when you change the expiration date on your master key or any of its subkey, or
-> * when you revoke or generate a revocation certificate for the complete key.
+> * sign someone else's key or revoke an existing signature
+> * add a new UID or mark an existing UID as primary
+> * create a new subkey
+> * revoke an existing UID or subkey
+> * change the preferences (e.g., with setpref) on a UID
+> * change the expiration date on your master key or any of its subkey
+> * revoke or generate a revocation certificate for the complete key
 >
 > (Because each of these operation is done by adding a new self- or revocation signatures from the private master key.)
 >

@@ -26,20 +26,20 @@ The sdcard is recognized by dom0 as soon as I plug it in.
 I plug in the sdcard and then I run this in dom0 terminal:
 
 ``` bash
-    qvm-block
+qvm-block
 ```
 
 The output should contain:
 
 ``` bash
-    BACKEND:DEVID DESCRIPTION  USED BY
-    sys-usb:mmcblk0  ()
+BACKEND:DEVID DESCRIPTION  USED BY
+sys-usb:mmcblk0  ()
 ```
 If Qubes OS is configured to use a [USB keyboard](https://www.qubes-os.org/doc/usb/#how-to-use-a-usb-keyboard) at boot then there will be a little difference:
 
 ``` bash
-    BACKEND:DEVID DESCRIPTION  USED BY
-    dom0:mmcblk0  ()
+BACKEND:DEVID DESCRIPTION  USED BY
+dom0:mmcblk0  ()
 ```
 
 This means that Qubes OS can see and use my sdcard device.
@@ -53,9 +53,9 @@ As described in the [documentation](https://www.qubes-os.org/doc/usb/) a qube ca
 Before attaching the sdcard to the _vault_ qube, I monitor the _vault_ syslog:
 
 ``` bash
-    sudo multitail /var/log/syslog
+sudo multitail /var/log/syslog
 
-    #hit enter to place the red line marker
+#hit enter to place the red line marker
 ```
 
 In Qubes OS USB drive mounting is integrated into the _devices widget_: the tool tray icon with a yellow square located in the top right of the screen.
@@ -69,8 +69,8 @@ I click on _vault_ and the sdcard is attached.
 Something like this pops up in the syslog of the _vault_:
 
 ``` bash
-    blkfront: xvdi: barrier or flush: disabled; persistent grants: enabled; indirect descriptors: enabled;
-    **xvdi: xvdi1**
+blkfront: xvdi: barrier or flush: disabled; persistent grants: enabled; indirect descriptors: enabled;
+**xvdi: xvdi1**
 ```
 
 This means that the sdcard block is accessible to the _vault_ as `/dev/xvdi`. To check if this is true:
@@ -88,9 +88,9 @@ As a security measure which hardens the sdcard against forensic attacks, I fill 
 In _vault_ terminal:
 
 ``` bash
-    SDCARD_DRIVE="/dev/xvdi"
-    sudo dd if=/dev/urandom of=${SDCARD_DRIVE} bs=1M status=progress
-    sudo sync
+SDCARD_DRIVE="/dev/xvdi"
+sudo dd if=/dev/urandom of=${SDCARD_DRIVE} bs=1M status=progress
+sudo sync
 ```
 
 This operation can take a long time depending on the size of the sdcard (~4GB in my case) and the speed of the sdcard-reader but then the output will be something like:
@@ -120,7 +120,7 @@ This is obviously not a solid security measure but sometimes even simple tricks 
 I create the two partitions (Linux type) with `cfdisk`. This is a good [guide](https://www.thegeekdiary.com/understanding-linux-cfdisk-utility/) for it.
 
 ``` bash
-    sudo cfdisk /dev/xvdi
+sudo cfdisk /dev/xvdi
 ```
 
 Alternatively `fdisk` can be use instead of `cfdisk` and this is a good [guide](https://www.tecmint.com/fdisk-commands-to-manage-linux-disk-partitions/) for it.
@@ -128,7 +128,7 @@ Alternatively `fdisk` can be use instead of `cfdisk` and this is a good [guide](
 My sdcard is 3.7GB and I choose to split it in 3GB (/dev/xvdi1) and 100MB (/dev/xvdi2). The latter is the _hush partition_
 
 ``` bash
-    fdisk -l /dev/xvdi
+fdisk -l /dev/xvdi
 ```
 
 The output is something like:
@@ -150,7 +150,7 @@ Device       Size Type
 I choose the VFAT filesystem for the dumb partition so that it can be mounted by any operating system.
 
 ``` bash
-    sudo mkfs.vfat -F 32 -n DATA /dev/xvdi1
+sudo mkfs.vfat -F 32 -n DATA /dev/xvdi1
 ```
 This partition is now ready to be mounted and filled in with irrelevant data
 
@@ -159,76 +159,76 @@ This partition is now ready to be mounted and filled in with irrelevant data
 I protect the content of the _hush partition_ with [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup).
 
 ``` bash
-    sd_drive="/dev/xvdi"
-    sd_ext4_part="/dev/xvdi1"
-    sd_enc_part="/dev/xvdi2"
-    mapper="hush"
-    mount_point="/home/user/.hush"
+sd_drive="/dev/xvdi"
+sd_ext4_part="/dev/xvdi1"
+sd_enc_part="/dev/xvdi2"
+mapper="hush"
+mount_point="/home/user/.hush"
 
-    mkdir ${mount_point} &> /dev/null
+mkdir ${mount_point} &> /dev/null
 
-    sudo cryptsetup -v -q -y --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 5000 --use-random luksFormat ${sd_enc_part}
+sudo cryptsetup -v -q -y --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 5000 --use-random luksFormat ${sd_enc_part}
 ```
 
 The last command creates the encrypted LUKS filesystem on `${sd_enc_part}` after asking the user to input the passphrase. It outputs:
 
 ``` bash
-    Command successful
+Command successful
 ```
 
 Now I bond the LUKS filesystem with loop device and I check its status
 
 ``` bash
 
-    # this asks again for the passphrase
-    sudo cryptsetup open --type luks ${sd_enc_part} ${mapper}
+# this asks again for the passphrase
+sudo cryptsetup open --type luks ${sd_enc_part} ${mapper}
 
-    # this checks status of the hush partition
-    sudo cryptsetup status ${mapper}
+# this checks status of the hush partition
+sudo cryptsetup status ${mapper}
 ```
 
 the last command outputs:
 
 ```bash
-    /dev/mapper/hush is active.
-    type:    LUKS1
-    cipher:  aes-xts-plain64
-    keysize: 512 bits
-    device:  /dev/xvdi1
-    offset:  4096 sectors
-    size:    200704 sectors
-    mode:    read/write
+/dev/mapper/hush is active.
+type:    LUKS1
+cipher:  aes-xts-plain64
+keysize: 512 bits
+device:  /dev/xvdi1
+offset:  4096 sectors
+size:    200704 sectors
+mode:    read/write
 ```
 
 I continue with:
 
 ```bash
-    # format loop device
-    sudo mkfs.ext4 -m 0 -L "hush" /dev/mapper/${mapper}
+# format loop device
+sudo mkfs.ext4 -m 0 -L "hush" /dev/mapper/${mapper}
 
-    # mount loop device on root filesystem
-    sudo mount /dev/mapper/${mapper} ${mount_point}
+# mount loop device on root filesystem
+sudo mount /dev/mapper/${mapper} ${mount_point}
 
-    # check if it's all fine
-    mount | grep ${mapper}
+# check if it's all fine
+mount | grep ${mapper}
 ```
 
 The last output looks like this:
 
 ```bash
-    /dev/mapper/hush on /home/user/.hush type ext4 (rw,relatime,data=ordered)
-    /dev/mapper/hush on /rw/home/user/.hush type ext4 (rw,relatime,data=ordered)
+/dev/mapper/hush on /home/user/.hush type ext4 (rw,relatime,data=ordered)
+/dev/mapper/hush on /rw/home/user/.hush type ext4 (rw,relatime,data=ordered)
 ```
 
 Finally, the _hush partition_ is now ready to be used. I dismount and close it to go ahead with other opertions.
 
 ```bash
 
-    # umount
-    sudo umount ${mount_point}
+# umount
+sudo umount ${mount_point}
 
-    # close everything
-    sudo cryptsetup close ${mapper}
+# close everything
+sudo cryptsetup close ${mapper}
 ```
 
 # Configure udev for the hush partition
@@ -240,7 +240,7 @@ A consistent device naming grants that the scripts will be always working as exp
 To do so, I use the _hush partition_ UUID and then I write a UDEV rule
 
 ``` bash
-    sudo cryptsetup luksUUID $sd_enc_part
+sudo cryptsetup luksUUID $sd_enc_part
 ```
 
 The output looks like this:
@@ -252,9 +252,9 @@ This is string unmistakably identifies the _hush partition_.
 I write the UDEV rule this way:
 
 ``` bash
-    UUID=$(sudo cryptsetup luksUUID $sd_enc_part)
-    sudo sh -c 'echo SUBSYSTEM=="block", ENV{ID_FS_UUID}==\"'${UUID}'\", RUN+="/usr/bin/logger --tag SD Card: Hush partition found. Linking it to /dev/hush ", SYMLINK+="hush" > /etc/udev/rules.d/99-sdcard.rules'
-    sudo service udev restart
+UUID=$(sudo cryptsetup luksUUID $sd_enc_part)
+sudo sh -c 'echo SUBSYSTEM=="block", ENV{ID_FS_UUID}==\"'${UUID}'\", RUN+="/usr/bin/logger --tag SD Card: Hush partition found. Linking it to /dev/hush ", SYMLINK+="hush" > /etc/udev/rules.d/99-sdcard.rules'
+sudo service udev restart
 ```
 
 > Note: _vault_ is a standalone qube (not an AppVM) so the changes to /etc/udev/rules.d/99-sdcard.rules will be persistent after a reboot
@@ -270,36 +270,36 @@ The script `attach_hush_to` attaches the _hush partition_ to the qube I want, no
 I copy `attach_hush_to` to dom0 with this command executed in a dom0 terminal:
 
 ``` bash
-    cd
-    qvm-run --pass-io vault 'cat /home/user/risks-scripts/dom0/attach_hush_to' > attach_hush_to
-    sudo mv attach_hush_to /usr/local/sbin/
-    sudo chmod +x /usr/local/sbin/attach_hush_to
+cd
+qvm-run --pass-io vault 'cat /home/user/risks-scripts/dom0/attach_hush_to' > attach_hush_to
+sudo mv attach_hush_to /usr/local/sbin/
+sudo chmod +x /usr/local/sbin/attach_hush_to
 ```
 
 Still in dom0 I add this to `~/.bashrc` so that `attach_hush_to` has its global vars configured:
 
 ``` bash
-    echo '
-    #SDCard
-    export SDCARD_BLOCK="sys-usb:mmcblk0p2"
-    ' >> ~/.bashrc
-    source ~/.bashrc
+echo '
+#SDCard
+export SDCARD_BLOCK="sys-usb:mmcblk0p2"
+' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 or this, if Qubes OS is configured to use a USB keyboard at boot
 
 ``` bash
-    echo '
-    #SDCard
-    export SDCARD_BLOCK="dom0:mmcblk0p2"
-    ' >> ~/.bashrc
-    source ~/.bashrc
+echo '
+#SDCard
+export SDCARD_BLOCK="dom0:mmcblk0p2"
+' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 At this point I can run from dom0:
 
 ```bash
-    attach_hush_to vault
+attach_hush_to vault
 ```
 
 and the _hush partition_ is now seen by _vault_ as `/dev/hush`.

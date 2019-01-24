@@ -37,11 +37,11 @@ At least it prevents the worst risk: being locked out.
 
 I have the habit of creating passphrases before starting the encryption process and I write them down on what I call _password paper_.
 
-I memorize the passphrases by repeating them by heart hundreds times until I feel confident that I won't forget them anymore.
+I memorize the passphrases by repeating them by heart hundreds times until I feel confident that I won't forget them.
 
 I mentally repeat my passwords on daily basis even if I'm not using my devices. It has become a traffic-light habit.
 
-Soon you'll need:
+Soon I'll need:
 
 * a passphrase for Qubes OS filesystem
 * a passphrase for the sdcard
@@ -57,7 +57,7 @@ For example the difficulty of the Qubes user's password depends on the chances t
 
 This is an example of how my _password paper_ looks like.
 
-**SYSTEM**
+**MUST BE REMEMBERED**
 
 | DESCRIPTION                               | PASSPHRASE                                 |
 | ----------------------------------------- | ------------------------------------------ |
@@ -67,7 +67,7 @@ This is an example of how my _password paper_ looks like.
 | MPW master password                       | fly smacks glass =*                        |
 
 
-**GPG**
+**CAN BE FORGOTTEN**
 
 | DESCRIPTION                               | PASSPHRASE                                 |
 | ----------------------------------------- | ------------------------------------------ |

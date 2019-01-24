@@ -19,6 +19,9 @@ header_pages:
   - 06_requirements.md
   - 07_get-started.md
   - 08_sdcard-initialization.md
+  - 09_about-gpg.md
+  - 10_gpg_setup.md
+  - 11_tomb-file-howto.md
   - acknowledgements.md
 
 # Social links

@@ -3,6 +3,23 @@ title: Tomb-file how to
 permalink: tomb-file-howto
 ---
 
+---
+<!-- TOC -->
+
+- [Tomb-file creation](#tomb-file-creation)
+    - [Global vars](#global-vars)
+    - [Open identity](#open-identity)
+    - [Tomb creation](#tomb-creation)
+    - [Key creation](#key-creation)
+    - [Tomb-Key bonding](#tomb-key-bonding)
+- [Tomb-file initialization](#tomb-file-initialization)
+- [Recap for copy & paste](#recap-for-copy--paste)
+
+<!-- /TOC -->
+---
+
+# Tomb-file creation
+
 In R.I.S.K.S. coffin-files are just for GPG-files while tomb-files are for all the other situations.
 
 Now that GPG is fully functional I'm able to create a tomb-file.
@@ -61,7 +78,7 @@ tomb lock -g -k ${HUSH_DIR}/${TOMBID}.key ${GRAVEYARD}/${TOMBID}.tomb
 
 This step completes the creation of any tomb-file.
 
-## Tomb-file initialization
+# Tomb-file initialization
 
 Now I can manually open the tomb and mount it on a temporary directory:
 
@@ -106,9 +123,13 @@ risks ro hush
 tomb lock -g -k ${HUSH_DIR}/${TOMBID}.key ${GRAVEYARD}/${TOMBID}.tomb
 ```
 
-To manage the tomb-file:
+Initialization and management:
 
 ``` bash
 risks open ${LABEL} ${IDENTITY}
+touch ${DIR}/.uid
+touch ${DIR}/.tty
+touch ${DIR}/.host
+touch ${DIR}/.last
 risks close ${LABEL} ${IDENTITY}
 ```

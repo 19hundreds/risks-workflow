@@ -35,6 +35,7 @@ Setting up RISKS results in:
 * an encrypted sdcard configured for hosting private keys
 * an isolated qube (virtual machine) configured for:
     * managing GPG configurations for multiple identities
+    * managing credentials using [pass](https://www.passwordstore.org/) and [mpw](https://masterpassword.app/)
     * managing SSH configurations for multiple identities
     * managing encryped filesystems (embedded in a file) for multiple identities
     * providing a secure access to GPG and SSH from other qubes

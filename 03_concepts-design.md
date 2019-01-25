@@ -38,7 +38,7 @@ These are the threats and the adopted mitigations in R.I.S.K.S.:
 | complexity leads to mistakes and misbehavior              | I keep things simple, I use few tools, I define clear procedures          |
 | user's behavior is the weakest point of the system        | I try to make the system as comfortable as I can                          |
 | humans memory is unreliable                               | I use few mnemonic passphrases and I keep the mnemonic effort low         |
-| media loss or theft                                       | I encrypt everything, I hid keys and I use an auto-locking systems        |
+| media loss or theft                                       | I encrypt everything, I hide keys and I use an auto-locking systems        |
 | media corruption                                          | I design disaster recovery techniques and procedures                      |
 
 Clearly, I focus on quite common environmental facts affecting almost everyone to a certain extent before considering active forms of attack.

@@ -20,9 +20,9 @@ permalink: /introduction
 
 I hope and think that R.I.S.K.S. can help who has little security background and is concerned about it. That's exactly how I started with R.I.S.K.S.
 
-The audience I'm targeting are journalists, lawyers, activists involved in sensitive matters, crypto-users but also regular users. People who believe that freedom is worth some sweating.
+The audience I'm targeting are journalists, lawyers, whistleblowers, activists, crypto-users, anyone involved in sensitive matters but also regular people. Anyone who believes that freedom is worth some sweating.
 
-I don't consider myself an expert neither in security nor in information technology but, as a human being and a citizen I'm very concerned by the monitoring and the profiling performed today and even more worried about tomorrow.
+I'm very concerned by the monitoring and the profiling performed today and even more worried about tomorrow.
 
 The implications on freedom frighten me.
 
@@ -44,7 +44,7 @@ Setting up RISKS results in:
 
 # Disclaimer
 
-However, despite the efforts, R.I.S.K.S. can have flaws.
+Despite the efforts, R.I.S.K.S. can have flaws.
 
 It also relies on encryption which in some areas of the world is forbidden and brutally persecuted.
 

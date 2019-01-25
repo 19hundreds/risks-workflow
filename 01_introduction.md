@@ -6,6 +6,7 @@ permalink: /introduction
 ---
 
 - [About](#about)
+- [What to expect from implementing R.I.S.K.S.](#what-to-expect-from-implementing-risks)
 - [Disclaimer](#disclaimer)
 - [Contribute](#contribute)
 - [Why Qubes OS?](#why-qubes-os)
@@ -26,6 +27,19 @@ I don't consider myself an expert neither in security nor in information technol
 The implications on freedom frighten me.
 
 This is my trigger. It has pushed me to investigate solutions and R.I.S.K.S. sums up part of what I've learned along the road.
+
+# What to expect from implementing R.I.S.K.S.
+
+Setting up RISKS results in:
+
+* an encrypted sdcard configured for hosting private keys
+* an isolated qube (virtual machine) configured for:
+    * managing GPG configurations for multiple identities
+    * managing SSH configurations for multiple identities
+    * managing encryped filesystems (embedded in a file) for multiple identities
+    * providing a secure access to GPG and SSH from other qubes
+* a set of scripts to manage the workflow comfortably
+* disaster recovery and backup procedures
 
 # Disclaimer
 

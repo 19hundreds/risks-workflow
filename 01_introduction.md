@@ -6,6 +6,7 @@ permalink: /introduction
 ---
 
 - [About](#about)
+- [Audience](#audience)
 - [What to expect from implementing R.I.S.K.S.](#what-to-expect-from-implementing-risks)
 - [Disclaimer](#disclaimer)
 - [Contribute](#contribute)
@@ -18,15 +19,17 @@ permalink: /introduction
 
 # About
 
-I hope and think that R.I.S.K.S. can help who has little security background and is concerned about it. That's exactly how I started with R.I.S.K.S.
-
-The audience I'm targeting are journalists, lawyers, whistleblowers, activists, crypto-users, anyone involved in sensitive matters but also regular people. Anyone who believes that freedom is worth some sweating.
-
 I'm very concerned by the monitoring and the profiling performed today and even more worried about tomorrow.
 
 The implications on freedom frighten me.
 
 This is my trigger. It has pushed me to investigate solutions and R.I.S.K.S. sums up part of what I've learned along the road.
+
+# Audience
+
+I hope and think that R.I.S.K.S. can help who has little security background and is concerned about it. That's exactly how I started with R.I.S.K.S.
+
+I'm targeting journalists, lawyers, whistleblowers, activists, crypto-users, anyone involved in sensitive matters but also regular people. Anyone who believes that freedom is worth some sweating.
 
 # What to expect from implementing R.I.S.K.S.
 

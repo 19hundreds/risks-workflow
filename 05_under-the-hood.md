@@ -28,8 +28,7 @@ Implementing R.I.S.K.S. provides:
 * one qube for storing files, called _joe-fsq_
 * one qube for software development or writing, called _joe-devq_
 * a mechanism, based on sdcard, for managing key-files
-* a disaster recovery procedure
-* a backup procedure
+* disaster recovery and backup procedures
 
 _joe-fsq_ and _joe-devq_ are the tool-set for a virtual identity called Joe.
 

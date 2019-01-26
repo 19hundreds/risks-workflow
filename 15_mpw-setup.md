@@ -8,6 +8,8 @@ permalink: mpw-setup
 
 - [Get the code](#get-the-code)
 - [Template configuration](#template-configuration)
+- [this is for Debian 10](#this-is-for-debian-10)
+- [this is for Debian 9](#this-is-for-debian-9)
 - [Vault setup](#vault-setup)
 - [At last](#at-last)
 - [Usage](#usage)

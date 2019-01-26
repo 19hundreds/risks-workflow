@@ -112,9 +112,12 @@ sudo sh -c 'echo $anyvm $anyvm ask > /etc/qubes-rpc/policy/ruddo.PassRead'
 Eventually, if I really trust _joe-devq_ and myself, I can authorize _joe-devq_ by default:
 
 ``` bash
-sudo sh -c 'echo joe-devq vault allow > /etc/qubes-rpc/policy/ruddo.PassRead'
+sudo sh -c 'echo joe-devq vault allow > /etc/qubes-rpc/policy/ruddo.PassManage'
+sudo sh -c 'echo $anyvm $anyvm ask >> /etc/qubes-rpc/policy/ruddo.PassManage'
 
+sudo sh -c 'echo joe-devq vault allow > /etc/qubes-rpc/policy/ruddo.PassRead'
 sudo sh -c 'echo $anyvm $anyvm ask >> /etc/qubes-rpc/policy/ruddo.PassRead'
+
 ```
 
 ## template configuration

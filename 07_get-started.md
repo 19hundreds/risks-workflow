@@ -97,19 +97,116 @@ From now I assume that all this has been done.
 
 # Vault configuration
 
-As already mentioned I have a qube called _vault_ which handles secrets, passwords and GPG.
+The _vault_ qube handles secrets, passwords and GPG.
 
-My _vault_ is a standalone qube created from an official Qubes OS Debian 9 image from which I remove the unneeded software.
+My _vault_ is a standalone network-less qube created from an official Qubes OS Debian 9 image from which I remove the unneeded software.
+
+> If you don't like Debian you can use your preferred Linux distribution but you need to adjust R.I.S.K.S. instructions accordingly.
 
 No need to create the _vault_ as AppVM because there is just one _vault_ serving all the identities.
 
-If you don't like Debian you can use your preferred Linux distribution but you need to adjust R.I.S.K.S. instructions accordingly.
+It uses only one CPU and it has memory balancing. The initial memory is 180MB and the max is 512MB. Max storage size: 2048MiB.
 
-> see the file `vault_packages.txt` in _risks-scripts_ for a list of suggested packages for _vault_.
+All these parameters can be adjusted from _Qube Manager_.
 
-_vault_ is supposed to be a network-less qube but during its configuration it needs to be connected to the internet (at least until I find an answer to this [question](https://www.reddit.com/r/Qubes/comments/agyune/how_to_use_update_proxy_on_standalonevm/) ).
+I left the file `vault_packages.txt` in _risks-scripts_ for a list of suggested packages for _vault_.
 
-A neater way would be to download all the required .deb packages and the additional software in a different network-connected qube and pass it to _vault_ via `qvm-copy`.
+## Access Updates Proxy
+
+_vault_ is a network-less qube but because it's a StandaloneVM, it won't even get access by default to the _[Qubes Updates Proxy](https://www.qubes-os.org/doc/software-update-vm/#updates-proxy)_.
+
+To solve this problem I proceed as follow:
+
+In dom0 terminal, I add a tag to _vault_
+
+``` bash
+qvm-tags vault add standaloneVM
+```
+
+Tags can be listed with this command:
+
+``` bash
+qvm-tags vault list
+```
+
+A tag identifies a group of qubes. Then I edit `vim /etc/qubes-rpc/policy/qubes.UpdatesProxy` in this way:
+
+``` bash
+# Upgrade Whonix TemplateVMs through sys-whonix.
+$tag:whonix-updatevm $default allow,target=sys-whonix
+# Deny Whonix TemplateVMs using UpdatesProxy of any other VM.
+$tag:whonix-updatevm $anyvm deny
+
+# Upgrade all StandaloneVm tagged as standaloneVM through sys-net
+$tag:standaloneVM $default allow,target=sys-net
+# Deny StandaloneVMs tagged as standaloneVM using UpdatesProxy of any other VM.
+$tag:standaloneVM $anyvm deny
+
+# Default rule for all TemplateVMs - direct the connection to sys-net
+$type:TemplateVM $default allow,target=sys-net
+$type:TemplateVM $anyvm deny
+
+$anyvm $anyvm deny
+```
+
+The two lines in the middle of the configuration file are giving access to any qube tagged as _standaloneVM_ to the _sys-net_ qube where _Qubes updates proxy_ runs by default.
+
+Then I enable the service updates-proxy-setup for vault (still in dom0):
+
+``` bash
+qvm-service --enable updates-proxy-setup
+```
+
+The list of enabled services for _vault_ can be displayed with this commmand:
+
+```
+qvm-service --list vault
+```
+
+The output in my case is:
+
+``` bash
+updates-proxy-setup on
+qubes-update-check  off
+cups                off
+```
+
+I keep the _qubes-update-check_ service disabled because somehow it doesn't work for me. Not a big deal.
+
+Now I turn on _vault_ (or reboot if it was on) and I check that the global var PROXY_ADDR is populated:
+
+``` bash
+echo ${PROXY_ADDR}
+```
+
+It should print:
+
+``` bash
+    http://127.0.0.1:8082
+```
+
+Also `/run/qubes-service/updates-proxy-setup` should be present (and empty).
+
+This means that the _updates-proxy-setup_ service was started correctly.
+
+This step should be optional but I run it to be sure:
+
+``` bash
+sudo /usr/lib/qubes/update-proxy-configs
+```
+
+This populates some configurations files in `/etc/` . I check that they were populated correctly:
+
+``` bash
+cat /etc/apt/apt.d/01qubes-proxy
+cat /etc/PackageKit/PackageKit.conf
+```
+
+They should both refer to the proxy server `http://127.0.0.1:8082`
+
+Finally I run `sudo apt update` and everything works as expected.
+
+Now I'm able to install and update debian packages but I'm not able to download anything that doesn't exist in the standard Debian repository so anytime I need something outside the standard repositories I download the additional software in a different network-connected qube and pass it to _vault_ via `qvm-copy`.
 
 ## Generic software
 

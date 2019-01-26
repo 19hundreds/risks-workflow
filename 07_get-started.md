@@ -5,22 +5,25 @@ permalink: get-started
 
 ---
 
+<!-- TOC -->
+
 - [Get ready](#get-ready)
-- [Isolated place](#isolated-place)
-- [Paper password](#paper-password)
+    - [Isolated place](#isolated-place)
+    - [Paper password](#paper-password)
 - [Get started](#get-started)
 - [Vault configuration](#vault-configuration)
-- [Generic software](#generic-software)
-- [Software for secrecy](#software-for-secrecy)
-- [Improved entropy](#improved-entropy)
-- [Disable bash history](#disable-bash-history)
-- [Turn off swap](#turn-off-swap)
-- [Install tomb](#install-tomb)
-- [Risks-scripts repository](#risks-scripts-repository)
-- [Network-less vault](#network-less-vault)
-- [Vault global vars](#vault-global-vars)
+    - [Network-less vault & Updates Proxy](#network-less-vault--updates-proxy)
+    - [Generic software](#generic-software)
+    - [Software for secrecy](#software-for-secrecy)
+    - [Improved entropy](#improved-entropy)
+    - [Disable bash history](#disable-bash-history)
+    - [Turn off swap](#turn-off-swap)
+    - [Install tomb](#install-tomb)
+    - [Risks-scripts repository](#risks-scripts-repository)
+    - [Vault global vars](#vault-global-vars)
 - [joe-fsq and joe-devq configuration](#joe-fsq-and-joe-devq-configuration)
 
+<!-- /TOC -->
 ---
 
 # Get ready

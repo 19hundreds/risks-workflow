@@ -111,9 +111,15 @@ All these parameters can be adjusted from _Qube Manager_.
 
 I left the file `vault_packages.txt` in _risks-scripts_ for a list of suggested packages for _vault_.
 
-## Access Updates Proxy
+## Network-less vault & Updates Proxy
 
-_vault_ is a network-less qube but because it's a StandaloneVM, it won't even get access by default to the _[Qubes Updates Proxy](https://www.qubes-os.org/doc/software-update-vm/#updates-proxy)_.
+_vault_ is a network-less qube so, from dom0 terminal:
+
+``` bash
+qvm-prefs vault netvm none
+```
+
+Because it's a StandaloneVM, it won't even get access by default to the _[Qubes Updates Proxy](https://www.qubes-os.org/doc/software-update-vm/#updates-proxy)_.
 
 To solve this problem I proceed as follow:
 
@@ -206,7 +212,7 @@ They should both refer to the proxy server `http://127.0.0.1:8082`
 
 Finally I run `sudo apt update` and everything works as expected.
 
-Now I'm able to install and update debian packages but I'm not able to download anything that doesn't exist in the standard Debian repository so anytime I need something outside the standard repositories I download the additional software in a different network-connected qube and pass it to _vault_ via `qvm-copy`.
+Now I'm able to install and update debian packages but I'm not able to download anything that doesn't exist in the standard Debian repository so anytime I need something outside the standard repositories I download the additional software in a different network-connected qube (_joe-devq_) and pass it to _vault_ via `qvm-copy`.
 
 ## Generic software
 
@@ -348,7 +354,7 @@ Tomb requires some additional packages:
 sudo apt-get install pinentry-curses zsh
 ```
 
-Tomb doesn't have a debian package but it's just a collection of bash scripts and so the installation is smooth.
+Tomb doesn't have a debian package but it's just a collection of bash scripts and so the installation is smooth but I have to download the _tar.gz_ package from _joe-devq_:
 
 ```bash
 cd /tmp
@@ -360,9 +366,16 @@ Output:
 
 > Tomb-2.5.tar.gz: OK
 
-Then:
+Then I have to copy it to _vault_ with `qvm-copy`:
+
+``` bash
+qvm-copy Tomb-2.5.tar.gz  # I choose x-vault as target
+```
+
+Then from _vault_:
 
 ```bash
+cd ~/QubesIncoming/joe-devq/
 tar xvfz Tomb-2.5.tar.gz
 cd Tomb-2.5
 sudo make install
@@ -372,27 +385,20 @@ rm -fR Tomb-2.5
 
 ## Risks-scripts repository
 
-Now it's time to download the _risks-script_ repository:
+Now it's time to download the _risks-script_ repository, still in _joe-devq_:
 
 ``` bash
 git clone https://github.com/19hundreds/risks-scripts.git
+qvm-copy risks-scripts/vault/risks # I choose x-vault as target
 ```
 
-and copy `risks` to some `${PATH}`
+Then from _vault_ copy `risks` to some `${PATH}`
 
 ``` bash
-sudo cp risks-scripts/vault/risks /usr/local/bin/
+sudo cp ~/QubesIncoming/joe-devq/risks /usr/local/bin/
+sudo chmod +x /usr/local/bin/
 ```
 
-I will then use `qvm-copy` to copy what I need to other qubes or dom0.
-
-## Network-less vault
-
-From now on _vault_ shouldn't be connected to any network so, from dom0 terminal:
-
-``` bash
-qvm-prefs vault netvm none
-```
 
 ## Vault global vars
 

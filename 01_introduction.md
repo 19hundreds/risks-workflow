@@ -33,15 +33,16 @@ I'm targeting journalists, lawyers, whistleblowers, activists, crypto-users, any
 
 # What to expect from implementing R.I.S.K.S.
 
-Setting up RISKS results in:
+Setting up RISKS and following its workflow results in:
 
+* just four (4) passphares to memorize to manage all the secrets (doesn't matter how many identities or how many secrets)
 * an encrypted sdcard configured for hosting private keys
 * an isolated qube (virtual machine) configured for:
     * managing GPG configurations for multiple identities
-    * managing credentials using [pass](https://www.passwordstore.org/) and [mpw](https://masterpassword.app/)
+    * managing credentials using [pass](https://www.passwordstore.org/)
     * managing SSH configurations for multiple identities
-    * managing encryped filesystems (embedded in a file) for multiple identities
-    * providing a secure access to GPG and SSH from other qubes
+    * managing multiple encrypted filesystems (embedded in a file) for multiple identities
+    * providing a secure access to GPG and SSH keys from any other qube
 * a set of scripts to manage the workflow comfortably
 * disaster recovery and backup procedures
 

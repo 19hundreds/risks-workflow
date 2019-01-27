@@ -59,8 +59,11 @@ I produce its key and make it immutable:
 
 ``` bash
 risks rw hush
+
 tomb forge -g -r ${RECIPIENT} ${HUSH_DIR}/${TOMBID}.key
+
 sudo chattr +i ${HUSH_DIR}/${TOMBID}.key
+
 risks ro hush
 ```
 

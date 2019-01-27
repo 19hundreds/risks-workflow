@@ -30,3 +30,7 @@ I list here below particularly useful links found during the development of R.I.
 * qubes-os guide
 * [unattended GPG key generation](https://gnupg.org/documentation/manuals/gnupg-2.0/Unattended-GPG-key-generation.html)
 * [GPG for SSH authentication](https://incenp.org/notes/2014/gnupg-for-ssh-authentication.html)
+
+## About SSH-split
+
+* [Denis Zanin](https://deniszanin.com/using-split-ssh-gpg-in-qubes-os/)

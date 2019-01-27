@@ -166,6 +166,7 @@ In the template of _joe-devq_ (_debian-10-dev_)
 
 ``` bash
 sudo apt-get install qubes-gpg-split
+sudo mv /usr/bin/gpg /usr/bin/gpg-ori
 ln -s $(which qubes-gpg-client) /usr/bin/gpg
 sudo shutdown -P 0
 ```

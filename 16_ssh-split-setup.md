@@ -28,15 +28,14 @@ It works the same way as GPG-split: _vault_ is the provider of the ssh-keys for 
 
 # Tomb file for ssh
 
-I follow the standard procedure to create a tomb file (20MB) in _vault_ to host the keys of my `~/.ssh` directory:
+I follow the [standard procedure](/risks-workflow/tomb-file-howto) to create a tomb file (20MB) in _vault_ to host the keys of my `~/.ssh` directory:
 
 ``` bash
 IDENTITY="joe"
 RECIPIENT="joe@foo.bar"
 LABEL="ssh"
 TOMBID="${IDENTITY}-${LABEL}"
-risks open gpg ${IDENTITY}
-tomb dig -s 20 ${GRAVEYARD}/${TOMBID}.tomb
+SIZE=20
 ```
 > don't change `${TOMBID}` or `risks` and `risq` will not work as expected
 

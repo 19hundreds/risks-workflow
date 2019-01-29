@@ -12,6 +12,10 @@ permalink: gpg-setup-part2
     - [Subkey-pairs backup](#subkey-pairs-backup)
     - [Comfortable is better](#comfortable-is-better)
 - [HUSH backup](#hush-backup)
+- [GRAVEYARD backup](#graveyard-backup)
+- [Test](#test)
+- [Protection from accidental overwriting](#protection-from-accidental-overwriting)
+- [Umounting pendrive](#umounting-pendrive)
 
 <!-- /TOC -->
 ---
@@ -152,17 +156,25 @@ gpg --export --armor ${FINGERPRINT} > ${HOME}/gpg-${IDENTITY}-public-armored.key
 
 # HUSH backup
 
-I also backup the _hush partition_ and the _graveyard_.
+I also backup the _hush partition_
 
 ``` bash
 risks close gpg ${IDENTITY}
 risks umount hush
 
 sudo dd if=/dev/hush of=${MOUNT_POINT}/hush.img
+```
 
-mkdir ${MOUNT_POINT}/graveyard
+# GRAVEYARD backup
+
+... and the _graveyard_.
+
+``` bash
+mkdir ${MOUNT_POINT}/graveyard &> /dev/null
 cp -fR ${HOME}/.graveyard/* ${MOUNT_POINT}/graveyard
 ```
+
+# Test
 
 These are the files stored in the pen-drive:
 
@@ -181,6 +193,8 @@ tree
         └── public-primary-keypair.arm.key
 ```
 
+# Protection from accidental overwriting
+
 I make all the files immutable:
 
 ``` bash
@@ -188,6 +202,8 @@ sudo chattr +i ${MOUNT_POINT}/graveyard/*
 sudo chattr +i ${MOUNT_POINT}/hush.img
 sudo chattr +i ${MOUNT_POINT}/gpg/${IDENTITY}/*
 ```
+
+# Umounting pendrive
 
 The backup stage is finished
 

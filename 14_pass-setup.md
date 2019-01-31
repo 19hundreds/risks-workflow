@@ -23,7 +23,7 @@ It's now time to configure `pass` the credentials-manager.
 
 # Tomb file for pass
 
-`pass` needs a place where to store pass-file so I set these variables and I create the tomb-file following the [standard procedure](risks-workflow/tomb-file-howto).
+I want to force `pass` to store its pass-files in a tomb-file. I create the tomb-file by setting these global vars:
 
 ``` bash
 IDENTITY="joe"
@@ -34,21 +34,25 @@ SIZE=50
 risks open gpg ${IDENTITY}
 ```
 
-> Don't change `${TOMBID}` or `risks` won't work as expected
+and following the [standard procedure](tomb-file-howto).
+
+> Don't change `${TOMBID}` or `risks` won't work as expected.
 
 # Initialize password-store
 
-I opent the pass tomb-file:
+Once the tomb-file creation is over I open it with:
 
 ``` bash
 risks open pass ${IDENTITY}
 ```
 
-and I initialize the password repository (`~/.password-store`):
+I initialize the password repository (`~/.password-store`):
 
 ``` bash
 pass init ${RECIPIENT}
 ```
+
+> Notice: `${RECIPIENT}` is the email used for the GPG configuration which in this case acts as GPG key identifier
 
 I can now start using `pass` and save my website credentials (or any kind of note) with it.
 
@@ -65,7 +69,7 @@ url: https://www.reddit.com
 
 ```
 
-The password is always saved in the first line of the file.
+> Notice: The password is always saved in the first line of the file and it's standard for `pass`
 
 # pass-split configuration
 

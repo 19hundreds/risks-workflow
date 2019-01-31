@@ -23,7 +23,7 @@ It's now time to configure `pass` the credentials-manager.
 
 # Tomb file for pass
 
-`pass` needs a place where to store pass-file so I set these variables and I create the tomb-file following the standard procedure.
+`pass` needs a place where to store pass-file so I set these variables and I create the tomb-file following the [standard procedure](risks-workflow/tomb-file-howto).
 
 ``` bash
 IDENTITY="joe"
@@ -138,7 +138,7 @@ I have hard time remembering all theses scripts so I create an alias which allow
 
 ``` bash
 sudo sh -c 'echo "vault" > /rw/config/pass-split-domain'
-echo 'alias pass="qvm-pass"' > ~/.bash_aliases
+echo 'alias pass="qvm-pass"' >> ~/.bash_aliases
 sudo shutdown -P 0
 ```
 

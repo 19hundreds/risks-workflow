@@ -163,7 +163,7 @@ The two lines in the middle of the configuration file are giving access to any q
 Then I enable the service updates-proxy-setup for vault (still in dom0):
 
 ``` bash
-qvm-service --enable updates-proxy-setup
+qvm-service --enable vault updates-proxy-setup
 ```
 
 The list of enabled services for _vault_ can be displayed with this commmand:

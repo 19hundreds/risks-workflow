@@ -46,8 +46,8 @@ github_username: 19hundreds
 # googleplus_username: +jekyll
 
 # Mastodon instances
-# mastodon:
-# - username: jekyll
-#   instance: example.com
+mastodon:
+- username: 19hundreds
+  instance: mastodon.sdf.org
 # - username: jekyll2
 #   instance: example.com

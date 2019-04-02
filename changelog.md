@@ -3,7 +3,12 @@ title: Changelog
 permalink: /changelog
 ---
 
-# 2019-01-29
+## 2019-04-02
+
+* Accepted PR #1
+* Added mastodon social link
+
+## 2019-01-29
 
 Minor improvements to:
 
@@ -12,10 +17,10 @@ Minor improvements to:
 
 No new concepts introduced, no substantial change.
 
-# 2019-01-25
+## 2019-01-25
 
 First publication
 
-# 2019-01-27
+## 2019-01-27
 
-Added SSH-SPLIT configuration
+* Added SSH-SPLIT configuration

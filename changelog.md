@@ -7,6 +7,7 @@ permalink: /changelog
 
 * Accepted PR #1
 * Added mastodon social link
+* Added donation page
 
 ## 2019-01-29
 
@@ -23,4 +24,4 @@ First publication
 
 ## 2019-01-27
 
-* Added SSH-SPLIT configuration
+Added SSH-SPLIT configuration

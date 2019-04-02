@@ -64,8 +64,6 @@ Correct what you think is wrong or suggest what can be improved.
 
 Feel free to open an issue on [Github](https://github.com/19hundreds/password-management-workflow/issues) and to send a PR.
 
-
-
 # Why Qubes OS?
 
 [Qubes OS](https://www.qubes-os.org/) is a "reasonably secure operating system for personal computer". It's based on the Xen hypervisor and offers better security by **compartmentalizing** the user's activities in isolated Linux virtual machines called _qubes_.

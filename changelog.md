@@ -8,6 +8,7 @@ permalink: /changelog
 * Accepted PR #1
 * Added mastodon social link
 * Added donation page
+* Added GIF screencast
 
 ## 2019-01-29
 

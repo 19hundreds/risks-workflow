@@ -1,6 +1,6 @@
 # About
 
-This is the source repository for [R.I.S.K.S. workflow](https://19hundreds.github.io/risks-workflow/changelog)
+This is the source repository for [R.I.S.K.S. workflow](https://19hundreds.github.io/risks-workflow/)
 
 # Social
 

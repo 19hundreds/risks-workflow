@@ -8,10 +8,9 @@ R.I.S.K.S. doesn't finish here.
 Soon I will add:
 
 * generic tomb-file configuration
-* ssh-split configuration
 * git-split configuration
 * bitcoin-split configuration
-* monero configuration
+* monero-split configuration
 
 and possibly something more.
 
